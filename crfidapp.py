@@ -29,13 +29,6 @@ def add_watermark(input_pdf_path, output_pdf_path, watermark_text, pages_to_wate
     watermark_page = watermark_reader.pages[0]
 
     # Apply the watermark
-    n_pages = len(pdf_reader.pages)
-    for i in range(0, 3):
-        page = pdf_reader.pages[i]
-        page.merge_page(watermark_page)
-        pdf_writer.add_page(page)
-
-    # Apply the watermark
     num_pages = len(pdf_reader.pages)
     for i in range(num_pages):
         page = pdf_reader.pages[i]
