@@ -3,6 +3,7 @@ import streamlit as st
 import PyPDF2
 from reportlab.lib.pagesizes import letter,A4
 from reportlab.pdfgen import canvas
+import os
 
 CRF_VERSION = '5.0.3'
 CRF = f'ddi_crf_baseline_{CRF_VERSION}.pdf'
@@ -79,14 +80,13 @@ def pdf_tool():
         # Add watermark to internal PDF
         add_watermark(internal_pdf_path, output_path, subject_id, pages, progress_bar)
 
-        # Show download button
-        st.write("Watermarking complete!")
         download_button = st.download_button(
-            label="Download Watermarked PDF",
+            label="Download PDF",
             data=open(output_path, "rb"),
             file_name=output_path,
             mime="application/pdf",
         )
-
+        # remove the output file after download
+        os.remove(output_path)
 
 pdf_tool()
